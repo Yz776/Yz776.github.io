@@ -98,3 +98,18 @@ body {
 @keyframes spin {
     to { transform: rotate(360deg); }
 }
+/* POSISI AWAL (HANYA UNTUK LOAD PERTAMA) */
+.anim-1 {
+    transform: translateX(120px);
+    opacity: 0;
+}
+
+.anim-2 {
+    transform: translateX(-120px);
+    opacity: 0;
+}
+
+.anim-3 {
+    transform: translateY(120px);
+    opacity: 0;
+}
