@@ -1,94 +1,72 @@
-let activeLink = null; // link yang sedang aktif
-
-// LOADING PROFIL
+// ANIMASI PROFIL SAAT LOAD
 window.addEventListener("load", () => {
     anime({
         targets: ".kartu-profil",
         opacity: [0, 1],
-        translateY: [-30, 0],
-        duration: 900,
+        translateY: [-20, 0],
+        duration: 800,
         easing: "easeOutExpo"
     });
 });
 
-// SCROLL ANIMATION KARYA
-const cards = document.querySelectorAll(".karya-card");
+let activeLink = null;
 
-window.addEventListener("scroll", () => {
-    cards.forEach(card => {
-        if (card.dataset.animated) return;
-
-        const rect = card.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-            card.dataset.animated = "true";
-            anime({
-                targets: card,
-                opacity: [0, 1],
-                translateY: [40, 0],
-                duration: 700,
-                easing: "easeOutQuad"
-            });
-        }
-    });
-});
-
-// CLICK HANDLER (TOGGLE IFRAME)
 document.querySelectorAll(".karya-link").forEach(link => {
-    link.addEventListener("click", () => {
+    const originalText = link.innerHTML;
 
+    link.addEventListener("click", () => {
         const container = link.nextElementSibling;
 
-        // JIKA LINK YANG SAMA DIKLIK LAGI → TUTUP
+        // JIKA KLIK LINK YANG SAMA → TUTUP
         if (activeLink === link) {
             container.innerHTML = "";
+            link.innerHTML = originalText;
+            link.classList.remove("active");
             activeLink = null;
             return;
         }
 
-        // HAPUS SEMUA IFRAME LAIN
-        document.querySelectorAll(".iframe-container").forEach(c => {
-            c.innerHTML = "";
+        // RESET SEMUA
+        document.querySelectorAll(".iframe-container").forEach(c => c.innerHTML = "");
+        document.querySelectorAll(".karya-link").forEach(l => {
+            l.classList.remove("active");
+            l.innerHTML = l.dataset.original || l.innerHTML;
         });
 
-        // BUAT IFRAME BARU
-        const iframe = document.createElement("iframe");
-        iframe.src = link.dataset.url;
+        // SIMPAN TEXT ASLI
+        link.dataset.original = originalText;
 
-        container.appendChild(iframe);
-
-        anime({
-            targets: iframe,
-            opacity: [0, 1],
-            scale: [0.96, 1],
-            duration: 600,
-            easing: "easeOutExpo"
-        });
-
-        iframe.scrollIntoView({ behavior: "smooth", block: "start" });
-
+        // SET AKTIF
+        link.classList.add("active");
+        link.innerHTML = "❌ Tutup";
         activeLink = link;
-    });
-});
-        });
 
-        // BUAT IFRAME BARU
+        // TAMPILKAN LOADER
+        const loader = document.createElement("div");
+        loader.className = "loader";
+        container.appendChild(loader);
+
+        // BUAT IFRAME
         const iframe = document.createElement("iframe");
         iframe.src = link.dataset.url;
+        iframe.style.display = "none";
 
-        // TAMBAHKAN KE CARD YANG DIKLIK
-        const container = link.nextElementSibling;
+        iframe.onload = () => {
+            loader.remove();
+            iframe.style.display = "block";
+
+            anime({
+                targets: iframe,
+                opacity: [0, 1],
+                translateY: [20, 0],
+                duration: 600,
+                easing: "easeOutExpo"
+            });
+        };
+
         container.appendChild(iframe);
 
-        // ANIMASI IFRAME
-        anime({
-            targets: iframe,
-            opacity: [0, 1],
-            scale: [0.96, 1],
-            duration: 600,
-            easing: "easeOutExpo"
-        });
-
-        // AUTO SCROLL
-        iframe.scrollIntoView({ behavior: "smooth", block: "start" });
+        // SCROLL HALUS
+        container.scrollIntoView({ behavior: "smooth", block: "start" });
     });
 });
