@@ -70,3 +70,25 @@ document.querySelectorAll(".karya-link").forEach(link => {
         container.scrollIntoView({ behavior: "smooth", block: "start" });
     });
 });
+// ANIMASI MASUK KARYA (HANYA SEKALI SAAT LOAD)
+window.addEventListener("load", () => {
+    anime.timeline({ easing: "easeOutExpo" })
+        .add({
+            targets: ".anim-1",
+            translateX: [120, 0],
+            opacity: [0, 1],
+            duration: 700
+        })
+        .add({
+            targets: ".anim-2",
+            translateX: [-120, 0],
+            opacity: [0, 1],
+            duration: 700
+        }, "+=200")
+        .add({
+            targets: ".anim-3",
+            translateY: [120, 0],
+            opacity: [0, 1],
+            duration: 700
+        }, "+=200");
+});
