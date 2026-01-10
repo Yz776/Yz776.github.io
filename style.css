@@ -100,7 +100,7 @@ body {
     to { transform: rotate(360deg); }
 }
 /* POSISI AWAL (HANYA UNTUK LOAD PERTAMA) */
-.anim-1 {
+/* .anim-1 {
     transform: translateX(120px);
     opacity: 0;
 }
@@ -114,6 +114,14 @@ body {
     transform: translateY(120px);
     opacity: 0;
 }
+*/
+.anim-1,
+.anim-2,
+.anim-3 {
+    opacity: 1;              /* JANGAN 0 */
+    transform: translate(0); /* default aman */
+}
+
 /* CURSOR TYPED */
 .typed-cursor {
     font-size: 16px;
