@@ -1,45 +1,12 @@
-// =======================
-// GLASS SHATTER SOUND (NO FILE)
-// =======================
-function playGlassShatter() {
-    const AudioContext = window.AudioContext || window.webkitAudioContext;
-    const ctx = new AudioContext();
-
-    // Noise buffer
-    const bufferSize = ctx.sampleRate * 0.15;
-    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-    const data = buffer.getChannelData(0);
-
-    for (let i = 0; i < bufferSize; i++) {
-        data[i] = Math.random() * 2 - 1;
-    }
-
-    const noise = ctx.createBufferSource();
-    noise.buffer = buffer;
-
-    // Filter (high freq = kaca)
-    const filter = ctx.createBiquadFilter();
-    filter.type = "highpass";
-    filter.frequency.value = 2500;
-
-    // Gain envelope (crack → decay)
-    const gain = ctx.createGain();
-    gain.gain.setValueAtTime(1, ctx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
-
-    // Connect
-    noise.connect(filter);
-    filter.connect(gain);
-    gain.connect(ctx.destination);
-
-    noise.start();
-}
 
 // =======================
 // ANIMASI LANDING PAGE
 // =======================
 window.addEventListener("load", () => {
-
+    
+const glassSound = document.getElementById("glassSound");
+    let soundPlayed = false;
+    
     const tl = anime.timeline({
         easing: "easeOutExpo",
         duration: 800
@@ -59,13 +26,14 @@ window.addEventListener("load", () => {
         rotate: [-10, 0],
         duration: 900,
         easing: "easeOutElastic(1, .6)",
-
-    begin: () => {
+        begin: () => {
             if (!soundPlayed) {
-                playGlassShatter();
+                glassSound.currentTime = 0;
+                glassSound.volume = 0.7;
+                glassSound.play().catch(() => {});
                 soundPlayed = true;
             }
-        }
+    }
     }, "-=400")
 
     // NAMA (PER KATA)
