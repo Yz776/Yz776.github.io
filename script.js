@@ -2,7 +2,7 @@
 // AUDIO KACA PECAH (MOBILE SAFE)
 // =======================
 const glassSound = document.getElementById("glassSound");
-let audioUnlocked = false;
+let audioUnlocked = true;
 
 function playGlassSound() {
     if (!audioUnlocked) return;
