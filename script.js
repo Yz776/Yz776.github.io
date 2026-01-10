@@ -1,14 +1,86 @@
-// ANIMASI PROFIL SAAT LOAD
+// =======================
+// ANIMASI LANDING PAGE
+// =======================
 window.addEventListener("load", () => {
-    anime({
+
+    const tl = anime.timeline({
+        easing: "easeOutExpo",
+        duration: 800
+    });
+
+    // PROFIL CARD
+    tl.add({
         targets: ".kartu-profil",
         opacity: [0, 1],
-        translateY: [-20, 0],
-        duration: 800,
-        easing: "easeOutExpo"
+        translateY: [40, 0]
+    })
+
+    // FOTO PROFIL
+    .add({
+        targets: ".kartu-profil img",
+        scale: [0.6, 1],
+        rotate: [-10, 0],
+        duration: 900,
+        easing: "easeOutElastic(1, .6)"
+    }, "-=400")
+
+    // NAMA (PER KATA)
+    .add({
+        targets: ".kartu-profil h1",
+        opacity: [0, 1],
+        translateY: [30, 0]
+    }, "-=300")
+
+    // DESKRIPSI + BLUR
+    .add({
+        targets: ".kartu-profil p",
+        opacity: [0, 1],
+        filter: ["blur(6px)", "blur(0px)"],
+        duration: 700
+    })
+
+    // SOSIAL BUTTONS
+    .add({
+        targets: ".link-sosial a",
+        opacity: [0, 1],
+        scale: [0.8, 1],
+        delay: anime.stagger(200),
+        easing: "easeOutBack"
+    })
+
+    // JUDUL KARYA
+    .add({
+        targets: ".karya h2",
+        opacity: [0, 1],
+        translateY: [30, 0]
+    })
+
+    // KARYA CARD 1
+    .add({
+        targets: ".anim-1",
+        opacity: [0, 1],
+        translateX: [120, 0]
+    })
+
+    // KARYA CARD 2
+    .add({
+        targets: ".anim-2",
+        opacity: [0, 1],
+        translateX: [-120, 0]
+    })
+
+    // KARYA CARD 3
+    .add({
+        targets: ".anim-3",
+        opacity: [0, 1],
+        translateY: [120, 0]
     });
 });
 
+
+// =======================
+// TOGGLE IFRAME (STABIL)
+// =======================
 let activeLink = null;
 
 document.querySelectorAll(".karya-link").forEach(link => {
@@ -17,7 +89,7 @@ document.querySelectorAll(".karya-link").forEach(link => {
     link.addEventListener("click", () => {
         const container = link.nextElementSibling;
 
-        // JIKA KLIK LINK YANG SAMA → TUTUP
+        // TOGGLE OFF
         if (activeLink === link) {
             container.innerHTML = "";
             link.innerHTML = originalText;
@@ -26,27 +98,24 @@ document.querySelectorAll(".karya-link").forEach(link => {
             return;
         }
 
-        // RESET SEMUA
+        // RESET
         document.querySelectorAll(".iframe-container").forEach(c => c.innerHTML = "");
         document.querySelectorAll(".karya-link").forEach(l => {
             l.classList.remove("active");
             l.innerHTML = l.dataset.original || l.innerHTML;
         });
 
-        // SIMPAN TEXT ASLI
         link.dataset.original = originalText;
-
-        // SET AKTIF
         link.classList.add("active");
         link.innerHTML = "❌ Tutup";
         activeLink = link;
 
-        // TAMPILKAN LOADER
+        // LOADER
         const loader = document.createElement("div");
         loader.className = "loader";
         container.appendChild(loader);
 
-        // BUAT IFRAME
+        // IFRAME
         const iframe = document.createElement("iframe");
         iframe.src = link.dataset.url;
         iframe.style.display = "none";
@@ -58,37 +127,13 @@ document.querySelectorAll(".karya-link").forEach(link => {
             anime({
                 targets: iframe,
                 opacity: [0, 1],
-                translateY: [20, 0],
+                scale: [0.96, 1],
                 duration: 600,
                 easing: "easeOutExpo"
             });
         };
 
         container.appendChild(iframe);
-
-        // SCROLL HALUS
         container.scrollIntoView({ behavior: "smooth", block: "start" });
     });
-});
-// ANIMASI MASUK KARYA (HANYA SEKALI SAAT LOAD)
-window.addEventListener("load", () => {
-    anime.timeline({ easing: "easeOutExpo" })
-        .add({
-            targets: ".anim-1",
-            translateX: [120, 0],
-            opacity: [0, 1],
-            duration: 700
-        })
-        .add({
-            targets: ".anim-2",
-            translateX: [-120, 0],
-            opacity: [0, 1],
-            duration: 700
-        }, "+=200")
-        .add({
-            targets: ".anim-3",
-            translateY: [120, 0],
-            opacity: [0, 1],
-            duration: 700
-        }, "+=200");
 });
