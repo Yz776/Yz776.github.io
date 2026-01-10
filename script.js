@@ -58,23 +58,26 @@ window.addEventListener("load", () => {
     // KARYA CARD 1
     .add({
         targets: ".anim-1",
+        translateX: [120, 0],
         opacity: [0, 1],
-        translateX: [120, 0]
+        duration: 800
     })
 
     // KARYA CARD 2
     .add({
         targets: ".anim-2",
+        translateX: [-120, 0],
         opacity: [0, 1],
-        translateX: [-120, 0]
-    })
+        duration: 800
+    }, "+=200")
 
     // KARYA CARD 3
-    .add({
+    add({
         targets: ".anim-3",
+        translateY: [120, 0],
         opacity: [0, 1],
-        translateY: [120, 0]
-    });
+        duration: 800
+    }, "+=200");
 });
 
 
