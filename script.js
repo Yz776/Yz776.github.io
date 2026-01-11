@@ -11,6 +11,10 @@ function playGlassSound() {
         // Browser block autoplay → DIAM (tidak error)
         console.warn("Audio autoplay diblokir browser");
     });
+    // 📳 GETAR HP
+    if (navigator.vibrate) {
+        navigator.vibrate([40, 30, 40]);
+    }
 }
 
 
@@ -147,7 +151,7 @@ document.querySelectorAll(".karya-link").forEach(link => {
     const container = link.nextElementSibling;
 
     link.addEventListener("click", () => {
-
+        playGlassEffect();
         if (activeLink === link) {
             container.innerHTML = "";
             link.innerHTML = originalText;
