@@ -22,10 +22,7 @@ function playGlassSound() {
 // LOADING + ANIMASI OTOMATIS
 // =======================
 window.addEventListener("load", () => {
-    // 📳 GETAR HP
-    if (navigator.vibrate) {
-        navigator.vibrate([40, 30, 40]);
-    }
+    
     // JEDA LOADING
     setTimeout(() => {
 
@@ -41,6 +38,7 @@ window.addEventListener("load", () => {
                 const loading = document.getElementById("loading-screen");
                 if (loading) loading.remove();
                 startLandingAnimation();
+                playGlassSound();
             }
         });
 
@@ -181,11 +179,6 @@ document.querySelectorAll(".karya-link").forEach(link => {
         iframe.src = link.dataset.url;
         iframe.style.display = "none";
 
-        iframe.loading = "lazy";
-        iframe.style.width = "100%";
-        iframe.style.height = "60vw";
-        iframe.style.border = "1px solid #ccc";
-        
         iframe.onload = () => {
             loader.remove();
             iframe.style.display = "block";
