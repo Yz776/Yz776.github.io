@@ -6,7 +6,7 @@ const glassSound = document.getElementById("glassSound");
 function playGlassSound() {
     if (!glassSound) return;
     glassSound.currentTime = 0;
-    glassSound.volume = 0.2;
+    glassSound.volume = 0.1;
     glassSound.play().catch(() => {
         // Browser block autoplay → DIAM (tidak error)
         console.warn("Audio autoplay diblokir browser");
@@ -22,8 +22,10 @@ function playGlassSound() {
 // LOADING + ANIMASI OTOMATIS
 // =======================
 window.addEventListener("load", () => {
-// 🔊 COBA PUTAR SUARA (AUTOPLAY)
-        playGlassSound();
+    // 📳 GETAR HP
+    if (navigator.vibrate) {
+        navigator.vibrate([40, 30, 40]);
+    }
     // JEDA LOADING
     setTimeout(() => {
 
