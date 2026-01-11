@@ -151,7 +151,7 @@ document.querySelectorAll(".karya-link").forEach(link => {
     const container = link.nextElementSibling;
 
     link.addEventListener("click", () => {
-        playGlassEffect();
+        playGlassSound();
         if (activeLink === link) {
             container.innerHTML = "";
             link.innerHTML = originalText;
