@@ -200,3 +200,35 @@ body {
 .sertifikat h2 {
     margin-bottom: 2px; /* kurangi jarak judul ke kartu */
 }
+.karya-link.split {
+    display: flex;
+    padding: 0;
+    overflow: hidden;
+}
+
+.karya-link.split span {
+    flex: 1;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.karya-link .btn-close-half {
+    background: #dc3545;
+    color: #fff;
+}
+
+.karya-link .btn-open-half {
+    background: #198754;
+    color: #fff;
+}
+
+.karya-link .btn-open-half:hover {
+    background: #146c43;
+}
+
+.karya-link .btn-close-half:hover {
+    background: #bb2d3b;
+}

@@ -180,14 +180,11 @@ document.querySelectorAll(".karya-link").forEach(link => {
         playGlassSound();
         if (activeLink === link) {
             container.innerHTML = "";
-            link.innerHTML = originalText;
-            link.classList.remove("active");
-            // hapus tombol open tab
-            if (link.nextElementSibling?.classList.contains("open-tab-btn")) {
-             link.nextElementSibling.remove();
-            }
-            activeLink = null;
-            return;
+link.innerHTML = originalText;
+link.classList.remove("active", "split");
+activeLink = null;
+return;
+
         }
 
         document.querySelectorAll(".iframe-container").forEach(c => c.innerHTML = "");
@@ -197,9 +194,19 @@ document.querySelectorAll(".karya-link").forEach(link => {
         });
 
         link.dataset.original = originalText;
-        link.innerHTML = "❌ Tutup";
-        link.classList.add("active");
-        activeLink = link;
+       link.classList.add("active", "split");
+link.innerHTML = `
+    <span class="btn-close-half">❌ Tutup</span>
+    <span class="btn-open-half">🔗 Buka</span>
+`;
+activeLink = link;
+
+// aksi tombol buka
+link.querySelector(".btn-open-half").addEventListener("click", (e) => {
+    e.stopPropagation();
+    window.open(link.dataset.url, "_blank");
+});
+
         // TAMBAHKAN tombol open tab
         addOpenTabButton(link, link.dataset.url);
         
