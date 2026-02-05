@@ -207,9 +207,6 @@ link.querySelector(".btn-open-half").addEventListener("click", (e) => {
     window.open(link.dataset.url, "_blank");
 });
 
-        // TAMBAHKAN tombol open tab
-        addOpenTabButton(link, link.dataset.url);
-        
         const loader = document.createElement("div");
         loader.className = "loader";
         container.appendChild(loader);
