@@ -217,7 +217,7 @@ document.querySelectorAll(".karya-link").forEach(link => {
 });
 new Typed("#typed", {
     strings: [
-      "BACKEND WEBDEV",
+      "Backend WebDev",
       "AI Engineer",
       "Network Administrator",
       "Cloud Engineer"
