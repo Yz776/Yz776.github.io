@@ -159,7 +159,8 @@ body {
     100% { transform: scale(0.9); opacity: 0.6; }
 }
 .sertifikat {
-    margin-top: 80px;
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 .sertifikat-card {
@@ -189,11 +190,4 @@ body {
 .sertifikat-card p {
     color: #ccc;
     font-size: 14px;
-}
-
-.sertifikat-card a {
-    display: inline-block;
-    margin-top: 8px;
-    color: #00ffd5;
-    text-decoration: none;
 }
