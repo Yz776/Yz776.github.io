@@ -167,7 +167,7 @@ body {
     background: rgba(255,255,255,0.08);
     backdrop-filter: blur(10px);
     border-radius: 10px;
-    padding: 4px;
+    padding: clamp(10px, 2vw, 20px);
     text-align: center;
     transition: transform 0.3s;
 }
@@ -178,8 +178,9 @@ body {
 
 .sertifikat-card img {
     width: 100%;
-    border-radius: 3px;
-    margin-bottom: 2px;
+    height: auto;
+    display: block;
+    object-fit: contain;
 }
 
 .sertifikat-card h5 {
@@ -193,9 +194,7 @@ body {
 }
 
 .sertifikat .row {
-    gap: 15px; /* default Bootstrap lebih besar, ini mengecilkan jarak */
-    margin-left: 0;
-    margin-right: 0;
+    row-gap: clamp(12px, 2vw, 24px);
 }
 
 .sertifikat h2 {
